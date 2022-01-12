@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Conexión API</title>
+</head>
+
+<body>
+    <h4>Solicitud de múltiples APIs en secuencia</h4>
+    <script>
+        // bloque 1
+        const baseUrl = 'https://jsonplaceholder.typicode.com';
+
+        // bloque 2
+        async function request(url) {
+            const results = await fetch(url);
+            const response = await results.json();
+            return response;
+        }
+
+        // bloque 3
+        const getPosts = async (id) => {
+            const url = `${baseUrl}/posts?userId=${id}`;
+            return request(url);
+        }
+
+        // bloque 4
+        const getUser = async (id) => {
+            const url = `${baseUrl}/users/${id}`;
+            return request(url);
+        }
+
+        // bloque 5
+        const getData = () => {
+            let userId = Math.floor(Math.random() * 10 + 1); // 1 y 10
+            Promise.all([getUser(userId), getPosts(userId)])
+                .then(response => {
+                    console.log('response', response)
+                })
+                .catch(error => console.log('error', error))
+        }
+        getData();
+    </script>
+</body>
+
+</html>

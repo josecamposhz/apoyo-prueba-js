@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Conexión API</title>
+</head>
+
+<body>
+    <h4>Solicitud de múltiples APIs en secuencia</h4>
+    <script>
+        const baseUrl = 'https://rickandmortyapi.com/api';
+
+        const request = async (url) => {
+            const results = await fetch(url);
+            const response = await results.json();
+            return response;
+        }
+
+        const getLocations = async (id) => {
+            const url = `${baseUrl}/location/${id}`;
+            return request(url);
+        }
+
+        const getUser = async (id) => {
+            const url = `${baseUrl}/character/${id}`;
+            return request(url);
+        }
+
+        Promise.all([getUser(1), getLocations(1)])
+            .then(resp => {
+                console.log('resp', resp)
+            })
+            .catch(err => console.log('err', err))
+    </script>
+</body>
+
+</html>

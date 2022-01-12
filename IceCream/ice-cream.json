@@ -1,0 +1,17 @@
+{
+    "ice-cream": [
+        {
+            "nombre": "sardine",
+            "precio": 26
+        },
+        {
+            "nombre": "vanilla",
+            "precio": 27
+        },
+        {
+            "nombre": "chocolate",
+            "precio": 25
+        }
+    ],
+    "totalCompras": 50
+}
